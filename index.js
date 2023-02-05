@@ -14,7 +14,11 @@ const internalErrorMiddleware = require("./middlewares/internalErrorMiddleware")
 
 // instanse middleware
 ServerApp.use(express.json()); //=> parse as json data
-const croseList = ["http://example1.com", "http://example2.com"];
+const croseList = [
+  "http://localhost:3000",
+  "https://mdarifulislamroni.com",
+  "mdarifulislamroni.com",
+];
 const corsOptions = {
   origin: function (origin, callback) {
     if (croseList.indexOf(origin) !== -1) {
