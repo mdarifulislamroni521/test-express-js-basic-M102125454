@@ -5,7 +5,6 @@ const path = require("path");
 const cors = require("cors");
 // config dependencies
 const { config, database } = require("./enviroment/serverEnviroment");
-const { uploadUrl } = require("./helpers/fileUpload/urlConvater");
 // instenses
 const ServerApp = express();
 
@@ -16,7 +15,10 @@ const internalErrorMiddleware = require("./middlewares/internalErrorMiddleware")
 // instanse middleware
 ServerApp.use(express.json()); //=> parse as json data
 ServerApp.use(
-  cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 })
+  cors({
+    origin: ["http://localhost:3000", "mdarifulislamroni.com"],
+    optionsSuccessStatus: 200,
+  })
 ); //=> allow crose headers
 ServerApp.use(
   "/public/static/uploads",
