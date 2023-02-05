@@ -14,12 +14,17 @@ const internalErrorMiddleware = require("./middlewares/internalErrorMiddleware")
 
 // instanse middleware
 ServerApp.use(express.json()); //=> parse as json data
-ServerApp.use(
-  cors({
-    origin: ["http://localhost:3000", "mdarifulislamroni.com"],
-    optionsSuccessStatus: 200,
-  })
-); //=> allow crose headers
+const croseList = ["http://example1.com", "http://example2.com"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (croseList.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+ServerApp.use(cors(corsOptions)); //=> allow crose headers
 ServerApp.use(
   "/public/static/uploads",
   express.static(path.join(__dirname, "public", "static", "uploads"))
